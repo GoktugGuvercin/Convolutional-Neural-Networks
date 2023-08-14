@@ -30,7 +30,17 @@ feature responses would be lower. Hence, denser features can be interpreted as s
   <img src="https://github.com/GoktugGuvercin/Convolutional-Neural-Networks/blob/main/Atrous%20Convolution/images/dilated%20convolution.png" width="1000" height="400" />
 </p>
 
-The usage of atrous convolution with spatial pyramid pooling was proposed in DeepLabV2, but it was also incorporated in next version, 
-which is DeepLabV3. Atrous convolution layers are initialized with different dilation rates and applied in parallel to capture 
-multi-scale information. Detection and segmentation of objects at multiple scales are some issues encountered in deep convolution 
-architectures. ASPP module is capable of extracting multi-scale context, so can alleviate this problem. 
+The usage of atrous convolution with spatial pyramid pooling, called as ASPP module, was proposed in DeepLabV2, but it was also incorporated in next version, which is DeepLabV3. Atrous convolution layers in this module are initialized with different dilation 
+rates and applied in parallel to capture multi-scale information. Detection and segmentation of objects at multiple scales are some issues encountered in deep convolution architectures. ASPP module is capable of extracting multi-scale context, so can alleviate this problem. 
+
+## DeepLabV3
+
+All ResNet architectures, no matter what version it is, start with a convolution layer of 7x7 kernel and 3x3 max-pooling. Both of them downsample the image by stride of 2. Hence, at the end of these two layers, the proportion of input resolution to extracted feature maps is equal to 4. Then, 4 convolution blocks show up in any version of this neural architecture; the structure and the size of filters in these blocks tend to vary depending on which version of ResNet is. However, the common property for all of them is that feature map resolution is reduced by half per block. This means that the output of entire network has 64 input-output resolution ratio. 
+
+The design of DeepLabV3 actually relies on ResNet combined with ASPP module to alleviate its reduced feature map resolution hierarchy. ASPP module consists of 4 parallel convolution layers followed by batch-norm and relu activation. 3 of these layers utilizes 3x3 kernel with dilation rate of 6, 12, and 18, whereas last convolution adopts 1x1 kernel. For all of them, 256 filters are used with same padding option.
+
+The main problem in ASPP module is the degeneration: As dilation rate gets larger, filter weights of its convolution layers are surpassed. In other words, fewer number of kernel weights are applied to valid image context. To solve this problem and cover global feature representatives to model, we insert global context module between ResNet backbone and ASPP module, which is composed of average pooling, 1x1 convolution with 256 filters and batch-norm layer:
+
+* Window size of average pooling = (Width, Height) of its input
+* 1x1 convolution has same padding.
+* Batch-norm output is passed to relu activation. 
