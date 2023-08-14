@@ -1,3 +1,4 @@
+# Atrous Convolution
 
 As we add more number of convolution layers to the network, we enlarge receptive field of feature maps and capture long range contextual 
 information of the image as feature maps. However, while doing that, we need to reduce spatial resolution by max-pooling or striding. 
@@ -25,6 +26,9 @@ feature map resolution. Let's assume that input image is 256x256, and final feat
 which means that the ratio would be 16. If we apply one max-pooling and downsample it into 8x8 maps, spatial density of computed 
 feature responses would be lower. Hence, denser features can be interpreted as smaller input-output spatial ratio. 
 
+<p align="center">
+  <img src="https://github.com/GoktugGuvercin/Convolutional-Neural-Networks/blob/main/Atrous%20Convolution/images/dilated%20convolution.png" width="1000" height="400" />
+</p>
 
 The usage of atrous convolution with spatial pyramid pooling was proposed in DeepLabV2, but it was also incorporated in next version, 
 which is DeepLabV3. Atrous convolution layers are initialized with different dilation rates and applied in parallel to capture 
