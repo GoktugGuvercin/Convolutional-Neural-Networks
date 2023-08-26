@@ -39,15 +39,12 @@ rates and applied in parallel to capture multi-scale information. Detection and 
   
 * Then, $4$ convolutional blocks come in. The structure and the size of filters in these blocks tend to vary depending on type of ResNet architecture. In ResNet-18/34, each block accomodates $2$ number $3 \times 3$ convolution layers, whereas larger ResNet models uses bottleneck-block of $3$ consecutive convolution layers.
 
-  
 * The common thing that all Res-Net variations have is that feature map resolution is reduced by half per block. In this case, the output of entire network has $64$ input-output resolution ratio. 
 
 ## DeepLabV3
 
-* DeepLabV3 actually relies on the combination of ResNet and ASPP module to alleviate its reduced feature map resolution problem. ASPP module consists of 4 parallel convolution layers followed by batch-norm and relu activation. First 3 of these layers utilizes 3x3 kernel with dilation rate of 6, 12, and 18, whereas last convolution adopts 1x1 kernel. For all of them, 256 filters are used with same padding.
+* DeepLabV3 actually relies on the combination of ResNet and ASPP module to alleviate its reduced feature map resolution problem. ASPP module consists of $4$ parallel convolution layers followed by batch-norm and relu activation. First $3$ of these layers utilizes $3 \times 3$ kernel with dilation rate of $6$, $12$, and $18$, whereas last convolution adopts $1 \times 1$ kernel. For all of them, $256$ filters are used with same padding.
 
-* The main problem in ASPP module is the degeneration: As dilation rate gets larger, filter weights of its convolution layers are surpassed. In other words, fewer number of kernel weights are applied to valid image context. To solve this problem and cover global feature representatives to model, we insert global context module between ResNet backbone and ASPP module, which is composed of average pooling, 1x1 convolution with 256 filters and batch-norm layer:
+* The main problem in ASPP module is the degeneration: As dilation rate gets larger, filter weights of its convolution layers are surpassed. In other words, fewer number of kernel weights are applied to valid image context. This is expressed in the paper with the following words: *"As sampling rate becomes larger, the number of valid filter weights (the weights that are applied to valid feature region instead of padded zeros) becomes smaller"*. To solve this problem and cover global feature representatives to model, we insert image pooling module aside ASPP module, which is composed of average pooling, 1x1 convolution with 256 filters, batch-norm layer and upsampling operator.
 
-* Window size of average pooling = (Width, Height) of its input
-* 1x1 convolution has same padding.
-* Batch-norm output is passed to relu activation. 
+
