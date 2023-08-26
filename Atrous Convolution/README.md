@@ -21,9 +21,10 @@ increase receptive field rapidly without any need of pooling or striding.
   
 * Apart from these, it also allows us to control how densely feature maps are computed in convolution backbone. At this point, the
   phrase *"the generation of dense/denser feature maps"* seems confusing, but this is related to the proportion of input resolution to
-  final feature map resolution. Let's assume that input image is 256x256, and final feature maps to be fed into dense layer are of
-  16x16. In that case, the ratio is equal to 16. If we apply one max-pooling and downsample it into 8x8 maps, spatial density of
-  new feature responses would be lower. Hence, denser features can be interpreted as smaller input-output spatial ratio. 
+  final feature map resolution. Let's assume that input image is $256 \times 256$, and final feature maps to be fed into dense layer are
+  of $16 \times 16$. In that case, the ratio is equal to $16$. If we apply one max-pooling and downsample it into $8 \times 8$ maps,
+  spatial density of new feature responses would be lower. Hence, denser features can be interpreted as smaller input-output spatial
+  ratio. 
 
 <p align="center">
   <img src="https://github.com/GoktugGuvercin/Convolutional-Neural-Networks/blob/main/Atrous%20Convolution/images/dilated%20convolution.png" width="800" height="300" />
@@ -34,18 +35,16 @@ rates and applied in parallel to capture multi-scale information. Detection and 
 
 ## ResNet Summary:
 
-* All ResNet architectures of version-1 start with a convolution layer of 7x7 kernel and 3x3 max-pooling. Both of them downsample the image by stride of 2. At the end of these two layers, the proportion of input resolution to extracted feature maps becomes 4.
+* All ResNet architectures of version-1 start with a convolution layer of $7 \times 7$ kernel and $3 \times 3$ max-pooling. Both of them downsample the image by stride of $2$. At the end of these two layers, the proportion of input resolution to extracted feature maps becomes $4$.
   
-* Then, 4 convolutional blocks come in. The structure and the size of filters in these blocks tend to vary depending on type of ResNet architecture. In ResNet-18/34, each block accomodates $2$ number $3x3$ convolution layers, whereas larger ResNet models uses bottleneck-block of 3 consecutive convolution layers.
+* Then, $4$ convolutional blocks come in. The structure and the size of filters in these blocks tend to vary depending on type of ResNet architecture. In ResNet-18/34, each block accomodates $2$ number $3 \times 3$ convolution layers, whereas larger ResNet models uses bottleneck-block of $3$ consecutive convolution layers.
 
   
-* The common thing that all Res-Net variations have is that feature map resolution is reduced by half per block. In this case, the output of entire network has 64 input-output resolution ratio. 
+* The common thing that all Res-Net variations have is that feature map resolution is reduced by half per block. In this case, the output of entire network has $64$ input-output resolution ratio. 
 
 ## DeepLabV3
 
-
-
-* The design of DeepLabV3 actually relies on the combination of ResNet and ASPP module to alleviate its reduced feature map resolution problem. ASPP module consists of 4 parallel convolution layers followed by batch-norm and relu activation. 3 of these layers utilizes 3x3 kernel with dilation rate of 6, 12, and 18, whereas last convolution adopts 1x1 kernel. For all of them, 256 filters are used with same padding.
+* DeepLabV3 actually relies on the combination of ResNet and ASPP module to alleviate its reduced feature map resolution problem. ASPP module consists of 4 parallel convolution layers followed by batch-norm and relu activation. First 3 of these layers utilizes 3x3 kernel with dilation rate of 6, 12, and 18, whereas last convolution adopts 1x1 kernel. For all of them, 256 filters are used with same padding.
 
 * The main problem in ASPP module is the degeneration: As dilation rate gets larger, filter weights of its convolution layers are surpassed. In other words, fewer number of kernel weights are applied to valid image context. To solve this problem and cover global feature representatives to model, we insert global context module between ResNet backbone and ASPP module, which is composed of average pooling, 1x1 convolution with 256 filters and batch-norm layer:
 
