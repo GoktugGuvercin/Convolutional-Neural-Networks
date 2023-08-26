@@ -47,4 +47,9 @@ rates and applied in parallel to capture multi-scale information. Detection and 
 
 * The main problem in ASPP module is the degeneration: As dilation rate gets larger, filter weights of its convolution layers are surpassed. In other words, fewer number of kernel weights are applied to valid image context. This is expressed in the paper with the following words: *"As sampling rate becomes larger, the number of valid filter weights (the weights that are applied to valid feature region instead of padded zeros) becomes smaller"*. To solve this problem and cover global feature representatives to model, we insert image pooling module aside ASPP module, which is composed of average pooling, 1x1 convolution with 256 filters, batch-norm layer and upsampling operator.
 
+<p align="center">
+  <img src="https://github.com/GoktugGuvercin/Convolutional-Neural-Networks/blob/main/Atrous%20Convolution/images/DeepLabV3%20Encoder.png" width="800" height="500" />
+</p>
+
+
 
