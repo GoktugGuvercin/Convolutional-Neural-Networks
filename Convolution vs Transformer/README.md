@@ -9,7 +9,9 @@
   problem; however, receptive fields of extracted feature maps are not still broadscale enough, which may affect the segmentation and detection of small regions adversely. Self
   attention modules [5, 6] combined with convolutional layers can highlight low-level details, help to concentrate on small-scale structures, and make non-local modeling easier.
 
-* Using  transformer-based architectures as a backbone encoder starts to be strong alternative to their convolutional counterparts, because they are capable of learning long-range features and encoding global context of input image easier and more effective [7]. The main methodology lying behind them is to convert images into a sequence of 1D patch embeddings and then process them by a series of transformer blocks composed of multi-head self attention layers and MLP modules. This approach helps to learn long-range and multi-scale representations in a better way. Depending on how the patches are created, transformer models can be applicable to both 2D and also 3D cases. 
+* Using transformer-based architectures as a backbone encoder starts to be strong alternative to their convolutional counterparts, because they are capable of learning long-range features and encoding global context of input image easier and more effective [7]. The main methodology lying behind them is to convert images into a sequence of 1D patch embeddings and then process them by a series of transformer blocks composed of multi-head self attention layers and MLP modules. This approach helps to learn long-range and multi-scale representations in a better way. Depending on how the patches are created, transformer models can be applicable to both 2D and also 3D cases.
+
+* Vision transformers were introduced first time for 2D image recognition [7], but now they are extended and usable in other down-stream tasks like object detection [9], semantic segmentation [8] and self-supervised learning [10]. 
 
 
 ## References:
@@ -21,3 +23,6 @@
 5. Fu, J., Liu, J., Tian, H., Li, Y., Bao, Y., Fang, Z., & Lu, H. (2019). Dual attention network for scene segmentation. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 3146-3154).
 6. Wang, X., Girshick, R., Gupta, A., & He, K. (2018). Non-local neural networks. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 7794-7803).
 7. Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., ... & Houlsby, N. (2020). An image is worth 16x16 words: Transformers for image recognition at scale. arXiv preprint arXiv:2010.11929.
+8. Xie, E., Wang, W., Yu, Z., Anandkumar, A., Alvarez, J. M., & Luo, P. (2021). SegFormer: Simple and efficient design for semantic segmentation with transformers. Advances in Neural Information Processing Systems, 34, 12077-12090.
+9. Carion, N., Massa, F., Synnaeve, G., Usunier, N., Kirillov, A., & Zagoruyko, S. (2020, August). End-to-end object detection with transformers. In European conference on computer vision (pp. 213-229). Cham: Springer International Publishing.
+10. Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., & Joulin, A. (2021). Emerging properties in self-supervised vision transformers. In Proceedings of the IEEE/CVF international conference on computer vision (pp. 9650-9660).
