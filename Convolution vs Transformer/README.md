@@ -1,5 +1,5 @@
 
-## Reported Deficiencies in Convolutional Architectures:
+## Introduction to CNNs and Transformers:
 
 * Fully-convolutional neural networks can learn powerful feature representations, but they have difficulty to extract long-range dependencies [1, 2]. In other words, what they
   learn is not so global, actually more local-based. The main reason why this happens is that the performance of convolutional architectures is limited to localized receptive
