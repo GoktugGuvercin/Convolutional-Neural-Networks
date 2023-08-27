@@ -1,12 +1,15 @@
 
 ## Reported Deficiencies in Convolutional Architectures:
 
-* Fully-convolutional neural networks can learn powerful feature representations, but they have difficulty to extract long-range dependencies [1, 2]. In other words, what they learn is
-  not so global, actually more local-based. The main reason why this happens is that the performance of convolutional architectures is limited to localized receptive fields.
+* Fully-convolutional neural networks can learn powerful feature representations, but they have difficulty to extract long-range dependencies [1, 2]. In other words, what they
+  learn is not so global, actually more local-based. The main reason why this happens is that the performance of convolutional architectures is limited to localized receptive
+  fields.
   
-* At this point, enlarging the receptive field per feature helps to cover long-range contextual learning. Atrous convolution [3, 4] is one of the strategies used to solve this problem;
-  however, receptive fields of extracted feature maps are not still broadscale enough, which may affect the segmentation and detection of small regions adversely. Self attention
-  modules [5, 6] combined with convolutional layers can highlight low-level details, help to concantrate on small-scale structures, and make non-local modeling easier.
+* At this point, enlarging the receptive field per feature helps to cover long-range contextual learning. Atrous convolution [3, 4] is one of the strategies used to solve this
+  problem; however, receptive fields of extracted feature maps are not still broadscale enough, which may affect the segmentation and detection of small regions adversely. Self
+  attention modules [5, 6] combined with convolutional layers can highlight low-level details, help to concentrate on small-scale structures, and make non-local modeling easier.
+
+* Using  transformer-based architectures as a backbone encoder starts to be strong alternative to their convolutional counterparts, because they are capable of learning long-range features and encoding global context of input image easier and more effective [7]. The main methodology lying behind them is to convert images into a sequence of 1D patch embeddings and then process them by a series of transformer blocks composed of multi-head self attention layers and MLP modules. This approach helps to learn long-range and multi-scale representations in a better way. Depending on how the patches are created, transformer models can be applicable to both 2D and also 3D cases. 
 
 
 ## References:
@@ -17,3 +20,4 @@
 4. Gu, Z., Cheng, J., Fu, H., Zhou, K., Hao, H., Zhao, Y., ... & Liu, J. (2019). Ce-net: Context encoder network for 2d medical image segmentation. IEEE transactions on medical imaging, 38(10), 2281-2292.
 5. Fu, J., Liu, J., Tian, H., Li, Y., Bao, Y., Fang, Z., & Lu, H. (2019). Dual attention network for scene segmentation. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 3146-3154).
 6. Wang, X., Girshick, R., Gupta, A., & He, K. (2018). Non-local neural networks. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 7794-7803).
+7. Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., ... & Houlsby, N. (2020). An image is worth 16x16 words: Transformers for image recognition at scale. arXiv preprint arXiv:2010.11929.
