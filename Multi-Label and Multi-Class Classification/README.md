@@ -5,17 +5,10 @@ In multi-class classification, the classes are mutually exclusive, which means t
 on the other hand, let the samples belong to multiple classes at the same time. For example, the fruit that we grab from the bag cannot be both apple and orange at the same time,
 but a movie that we want to watch can be classified with more than one genres. Multi-label classification specifically originated from text categorization problem. 
 
-- Class 1: Apple
-- Class 2: Orange
-- Class 3: Banana
-- Class 4: Watermelon
 
-
-
-- Class 1: Thriller
-- Class 2: Science fiction
-- Class 3: Horror
-- Class 4: Adventure
+<p align="center">
+  <img src="https://github.com/GoktugGuvercin/Convolutional-Neural-Networks/blob/main/Multi-Label%20and%20Multi-Class%20Classification/images/multi-class%20classification.png" width="600" height="270" />
+</p>
 
 
 If we have 4 classes to which the sample will be classified, 4 neurons/channels are configured in last layer of our classification/segmentation architecture, and 
@@ -30,5 +23,8 @@ $$ BCE(x, y) = - \sum_{x_i}^4 y_i \cdot log(x_i) + (1 - y_i) \cdot log(1 - x_i) 
 Second term in binary cross entropy is not used in standard cross entropy loss. This term regards the opposite of target class (non-existence) as a second class category, but 
 in multi-class classification non-existence of a class is related to the existence of other classes. Hence, this term does not exist in cross entropy with multi-class 
 classification case. On other hand, since each class is individually evaluated in binary form to express whether the sample belongs to that class or not in multi-label 
-classification, this non-existence is required, which induces the usage of binary cross entropy. Although we have multiple classes in multi-label classification, we don't classify the samples between them; instead we classify the samples between existence and non-existence 
-of a class for each of those multiple classes individually, so what we do still is binary classification. 
+classification, this non-existence is required, which induces the usage of binary cross entropy. Although we have multiple classes in multi-label classification, we don't classify the samples between them; instead we classify the samples between existence and non-existence of a class for each of those multiple classes individually, so what we do still is binary classification. 
+
+<p align="center">
+  <img src="https://github.com/GoktugGuvercin/Convolutional-Neural-Networks/blob/main/Multi-Label%20and%20Multi-Class%20Classification/images/multi-label%20classification.png" width="600" height="270" />
+</p>
